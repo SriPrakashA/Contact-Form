@@ -19,8 +19,10 @@ You may also see any lint errors in the console.
 This Project is a Simple ReactJS Project which demonstrates the following
 1. Intially We list all existing contacts
 2. We can add new contact by routing addcontact module
-3. Also we can edit or delete the contact.
+3. Also we can edit or delete the existing contacts.
 4. We are storing all the existing contacts in localstorage.
+
+In this project I have used react features like react-router-dom for routing purpose. Used hooks like useContext for state management, useReducer to update the state , useState and useEffect. Added suspense and lazy for performance optimization. Atlast I have developed each component in optimized and efficient manner.
 
 ### `npm test`
 
