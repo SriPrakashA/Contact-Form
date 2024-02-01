@@ -1,0 +1,71 @@
+.header{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 50px;
+    background-color: var(--primary-color);
+}
+.header h2{
+    font-family:var(--font-Pacifi) ;
+    color:var(--secondary-color) ;
+    /* text-shadow: 0 0 5px var(--secondary-color); */
+    letter-spacing: 0.8px;
+    margin-right: 25px;
+    user-select: none;
+}
+.header h3{
+    font-family: var(--font-quicksand);
+    font-weight: 600;
+    color: #fff;
+}
+h3 a{
+    text-decoration: none;
+    color: #fff;
+}
+.navbar-toggler:focus{
+    box-shadow: none !important;
+}
+.table-container{
+    height: 62vh;
+}
+.head{
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    margin: auto;
+}
+.edit-icon{
+    color: blue;
+    font-size: 19px;
+    margin-right: 7px;
+    cursor: pointer;
+}
+.del-icon{
+    color: red;
+    font-size: 19px;
+    cursor: pointer;
+}
+.bottom-btns{
+    display: flex;
+    gap: 15px;
+}
+.add-contact{
+    margin-top: 24px;
+    min-height: 75vh;
+    height: auto;
+}
+.add-contact span{
+    color: red;
+    font-size: 14px;
+    font-weight: 600;
+}
+label{
+    font-weight: 600;
+}
+label span{
+    color: var(--secondary-color);
+}
+.footer{
+    font-size: 15px;
+    color: #fff;
+    background-color: var(--primary-color);
+}
