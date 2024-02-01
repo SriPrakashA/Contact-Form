@@ -3,7 +3,7 @@ function Footer() {
   return (
     <>
       <h2 className="text-center py-3 footer">
-        © {c_date.getFullYear()} - All rights reserved{" "}
+        © <b>{c_date.getFullYear()}</b> - All rights reserved{" "}
       </h2>
     </>
   );

@@ -69,3 +69,6 @@ label span{
     color: #fff;
     background-color: var(--primary-color);
 }
+.footer b{
+    color: var(--secondary-color);
+}
