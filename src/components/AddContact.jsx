@@ -119,15 +119,15 @@ function AddContact() {
         if (contact_info) {
             setInputs({
                 ...inputs,
-                fname: contact_info.fname,
-                lname: contact_info.lname,
-                email: contact_info.email,
-                phone: contact_info.phone,
-                street: contact_info.street,
-                city: contact_info.city,
-                state: contact_info.state,
-                country: contact_info.country,
-                postalcode: contact_info.postalcode,
+                fname: contact_info?.fname,
+                lname: contact_info?.lname,
+                email: contact_info?.email,
+                phone: contact_info?.phone,
+                street: contact_info?.street,
+                city: contact_info?.city,
+                state: contact_info?.state,
+                country: contact_info?.country,
+                postalcode: contact_info?.postalcode,
             })
         }
     }, [contact_info])

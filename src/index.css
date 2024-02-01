@@ -32,6 +32,11 @@ body {
   border: 0 !important;
 }
 
+.d-grid-center{
+  display: grid !important;
+  place-items: center !important;
+}
+
 ::placeholder{
   color: rgba(0, 0, 0, 0.2) !important;
   font-size: 15px;
