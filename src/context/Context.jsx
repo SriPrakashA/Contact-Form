@@ -1,10 +1,10 @@
-import React, { createContext, useEffect, useReducer, useState } from "react";
+import React, { createContext,  useReducer, useState } from "react";
 
 const dataProvider = createContext([]);
 
 const Supplier = (props) => {
   const [statusCode, setStatusCode] = useState(0);
-  const [initialvalue, setInitialvalue] = useState([]);
+  const initialvalue = [];
 
   const [data, setData] = useReducer(myFunction, initialvalue);
 
