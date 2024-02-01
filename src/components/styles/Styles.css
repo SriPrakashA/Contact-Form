@@ -27,6 +27,9 @@ h3 a{
 .table-container{
     height: 62vh;
 }
+.sort{
+    font-size: 12px;
+}
 .head{
     width: 90%;
     display: flex;

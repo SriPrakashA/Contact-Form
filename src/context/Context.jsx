@@ -4,7 +4,7 @@ const dataProvider = createContext([]);
 
 const Supplier = (props) => {
   const [statusCode, setStatusCode] = useState(0);
-  const initialvalue = [];
+  const [initialvalue, setInitialvalue] = useState([]);
 
   const [data, setData] = useReducer(myFunction, initialvalue);
 
@@ -28,24 +28,40 @@ const Supplier = (props) => {
           setTimeout(() => {
             setStatusCode(0);
           }, 2000);
-          return [...state, action.value];
+          let sorted = [...state,action.value];
+          return sorted.sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+          // return [...state, action.value];
+          // return state.shift(action.value)
         }
         break;
       case "update":
-        let updated_contacts = state.map((val) => {
-          if (val.id === action.value.id) {
-            return {
-              ...val,
-              ...action.value,
-            };
-          }
-          return val;
+        let isExist = false;
+        state.forEach((val) => {
+          if (val.email === action.value.email && val.id !== action.value.id ) isExist = true;
         });
-        setStatusCode(3);
-        setTimeout(() => {
-          setStatusCode(0);
-        }, 2000);
-        return (state = updated_contacts);
+        if (isExist) {
+          setStatusCode(2);
+          setTimeout(() => {
+            setStatusCode(0);
+          }, 2000);
+          return [...state];
+        } else {
+          let updated_contacts = state.map((val) => {
+            if (val.id === action.value.id) {
+              return {
+                ...val,
+                ...action.value,
+              };
+            }
+            return val;
+          });
+          setStatusCode(3);
+          setTimeout(() => {
+            setStatusCode(0);
+          }, 2000);
+          return (state = updated_contacts);
+        }
+        
 
       case "delete":
         const ans = state.filter((val) => val.id !== action.value.id);

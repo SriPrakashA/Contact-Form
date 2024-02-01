@@ -1,8 +1,10 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { dataProvider } from "../context/Context";
 
 function ContactList() {
+  const [isSort,setIsSort] = useState(false);
+  const [tableData,setTableData] = useState([]);
   const { data, setData, statusCode } = useContext(dataProvider);
   const navigate = useNavigate();
 
@@ -23,11 +25,30 @@ function ContactList() {
     }
   };
 
+  const handleSort = () => {
+    let lists = [...tableData];
+    if (isSort) {
+      let new_list = lists.sort((a, b) => {
+        return a.fname.localeCompare(b.fname);
+      });
+      setTableData(new_list);
+      setIsSort(!isSort);
+    } else {
+      let new_list = lists.sort((a, b) => {
+        return b.fname.localeCompare(a.fname);
+      });
+      setTableData(new_list);
+      setIsSort(!isSort);
+    }
+  };
+
   useEffect(() => {
     let contact_list = JSON.parse(localStorage.getItem("mycontactlist"));
     if (contact_list) {
+      console.log(contact_list,'29');
       setData({ type: "get", value: contact_list });
     } else {
+      console.log('31')
       setData({ type: "get", value: [] });
     }
   }, []);
@@ -38,6 +59,13 @@ function ContactList() {
     }
   }, [statusCode]);
 
+  useEffect(() => {
+    if (data.length > 0) {
+      setTableData(data);
+    } else{
+      setTableData([]);
+    }
+  }, [data]);
   return (
     <>
       <div className="py-4 px-3 head">
@@ -55,7 +83,7 @@ function ContactList() {
           <thead className="table-dark">
             <tr>
               <th>S.No</th>
-              <th>Firstname</th>
+              <th onClick={handleSort} style={{cursor:"pointer"}} >Firstname {isSort?<i class="fa-solid fa-arrow-up sort"></i>:<i class="fa-solid fa-arrow-down sort"></i>} </th>
               <th>Lastname</th>
               <th>Email</th>
               <th>Phone</th>
@@ -68,8 +96,8 @@ function ContactList() {
             </tr>
           </thead>
           <tbody>
-            {Array.isArray(data) &&
-              data.map((val, i) => (
+            {Array.isArray(tableData) &&
+              tableData.map((val, i) => (
                 <tr key={i}>
                   <td>{i + 1}</td>
                   <td>{val.fname}</td>
@@ -97,7 +125,7 @@ function ContactList() {
               ))}
           </tbody>
         </table>
-        {Array.isArray(data) && data.length === 0 && (
+        {Array.isArray(tableData) && tableData.length === 0 && (
           <h4 className="text-center">No data found</h4>
         )}
       </div>
