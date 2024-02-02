@@ -2,52 +2,62 @@ import { useContext, useEffect, useState } from 'react';
 import './styles/Styles.css'
 import { dataProvider } from '../context/Context';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { checkInitialSpace, isEmail } from '../helper/utils';
 
 let my_fields =[
     {
         title:"First name",
         name:"fname",
-        type:"text"
+        type:"text",
+        placeholder:"Arun"
     },
     {
         title:"Last name",
         name:"lname",
-        type:"text"
+        type:"text",
+        placeholder:"kumar"
     },
     {
         title:"Email",
         name:"email",
-        type:"text"
+        type:"text",
+        placeholder:"arun@gmail.com"
     },
     {
         title:"Phone",
         name:"phone",
-        type:"number"
+        type:"number",
+        placeholder:"8754898745"
     },
     {
         title:"Street",
         name:"street",
-        type:"text"
+        type:"text",
+        placeholder:"45/a , Street One"
     },
     {
         title:"City",
         name:"city",
-        type:"text"
+        type:"text",
+        placeholder:"Coimbatore"
     },
     {
         title:"State",
         name:"state",
-        type:"text"
+        type:"text",
+        placeholder:"Tamil nadu"
     },
     {
         title:"Country",
         name:"country",
-        type:"text"
+        type:"text",
+        placeholder:"India"
     },
     {
         title:"Postal Code",
         name:"postalcode",
-        type:"text"
+        type:"text",
+        placeholder:"6410001"
     },
 ]
 
@@ -84,9 +94,12 @@ function AddContact() {
 
     const handleInputs = (e) => {
         const { name, value } = e.target;
-        setErrorMsg("");
-        setErrors({ ...errors, [name]: false });
-        setInputs({ ...inputs, [name]: value });
+        if (!checkInitialSpace(value)) {
+            setErrorMsg("");
+            setErrors({ ...errors, [name]: false });
+            setInputs({ ...inputs, [name]: value });  
+        }
+
     };
 
     const handleAdd = () => {
@@ -97,10 +110,10 @@ function AddContact() {
         } else if (lname.length < 1) {
             setErrors({ ...errors, lname: true });
             setErrorMsg("Lastname req min 1 char");
-        } else if (email.length < 3) {
+        } else if (!isEmail(email)) {
             setErrors({ ...errors, email: true });
             setErrorMsg("Enter valid email");
-        } else if (phone.length < 10) {
+        } else if (phone.length !== 10) {
             setErrors({ ...errors, phone: true });
             setErrorMsg("Enter valid 10 digit phone");
         } else if (street.length < 3) {
@@ -130,22 +143,31 @@ function AddContact() {
         const { fname, lname, phone, email, street, city, state, country, postalcode } = inputs;
         if (fname.length < 3) {
             setErrors({ ...errors, fname: true });
-        } else if (lname.length < 3) {
+            setErrorMsg("Firstname req min 3 char");
+        } else if (lname.length < 1) {
             setErrors({ ...errors, lname: true });
-        } else if (email.length < 3) {
+            setErrorMsg("Lastname req min 1 char");
+        } else if (!isEmail(email)) {
             setErrors({ ...errors, email: true });
+            setErrorMsg("Enter valid email");
         } else if (phone.length < 10) {
             setErrors({ ...errors, phone: true });
+            setErrorMsg("Enter valid 10 digit phone");
         } else if (street.length < 3) {
             setErrors({ ...errors, street: true });
+            setErrorMsg("Street req min 3 char");
         } else if (city.length < 3) {
             setErrors({ ...errors, city: true });
+            setErrorMsg("City req min 3 char");
         } else if (state.length < 3) {
             setErrors({ ...errors, state: true });
+            setErrorMsg("State req min 3 char");
         } else if (country.length < 3) {
             setErrors({ ...errors, country: true });
+            setErrorMsg("Country req min 3 char");
         } else if (postalcode.length < 6) {
             setErrors({ ...errors, postalcode: true });
+            setErrorMsg("Enter valid 6 digit postalcode");
         } else {
             let body = { ...inputs };
             body["id"] = contact_info?.id;
@@ -201,7 +223,7 @@ function AddContact() {
                         <div className="col-6 col-sm-5 col-md-4" key={index} >
                         <div className="mb-3 mt-3">
                             <label for="" className="form-label">{field.title} <span>*</span></label>
-                            <input type={field.type} className="form-control" value={inputs[field.name]} placeholder="eg:Arun" name={field.name} onChange={(e) => handleInputs(e) } />
+                            <input type={field.type} className="form-control" value={inputs[field.name]} placeholder={`eg:${field.placeholder}`} name={field.name} onChange={(e) => handleInputs(e) } />
                             {errors[field.name] && <span>{errorMsg}</span>}
 
                         </div>

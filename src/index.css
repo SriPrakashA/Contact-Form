@@ -36,8 +36,8 @@ body {
   display: grid !important;
   place-items: center !important;
 }
-
+/*  */
 ::placeholder{
-  color: rgba(0, 0, 0, 0.2) !important;
+  color: rgba(0, 0, 0, 0.4) !important;
   font-size: 15px;
 }

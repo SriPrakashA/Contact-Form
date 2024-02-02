@@ -27,19 +27,22 @@ function ContactList() {
 
   const handleSort = () => {
     let lists = [...tableData];
-    if (isSort) {
-      let new_list = lists.sort((a, b) => {
-        return a.fname.localeCompare(b.fname);
-      });
-      setTableData(new_list);
-      setIsSort(!isSort);
-    } else {
-      let new_list = lists.sort((a, b) => {
-        return b.fname.localeCompare(a.fname);
-      });
-      setTableData(new_list);
-      setIsSort(!isSort);
+    if (lists.length > 0) {
+      if (isSort) {
+        let new_list = lists.sort((a, b) => {
+          return a.fname.localeCompare(b.fname);
+        });
+        setTableData(new_list);
+        setIsSort(!isSort);
+      } else {
+        let new_list = lists.sort((a, b) => {
+          return b.fname.localeCompare(a.fname);
+        });
+        setTableData(new_list);
+        setIsSort(!isSort);
+      }
     }
+    
   };
 
   useEffect(() => {
